@@ -106,40 +106,126 @@
         let map;
     
         function initMap() {
+            const styledMapType = new google.maps.StyledMapType([
+                {
+                    "featureType": "landscape.man_made",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#f7f1df"}]
+                },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry",
+                    "stylers": [{ "color": "#d0e3b4"}]
+                },
+                {
+                    "featureType": "landscape.natural.terrain",
+                    "elementType": "geometry",
+                    "stylers": [{"visibility": "off"}]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels",
+                    "stylers": [{"visibility": "off"}]
+                },
+                {
+                    "featureType": "poi.business",
+                    "elementType": "all",
+                    "stylers": [{"visibility": "off"}]
+                },
+                {
+                    "featureType": "poi.medical",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#fbd3da"}]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#bde6ab"}]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{"visibility": "off"}]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels",
+                    "stylers": [{"visibility": "off"}]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ffe15f"}]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{"color": "#efd151"}]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ffffff"}]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "black"}]
+                },
+                {
+                    "featureType": "transit.station.airport",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#cfb2db"}]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#a2daf2"}]
+                }
+            ]);
+    
+            // Initialize the map
             map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 9.0, lng: 8.0 }, // Adjust as needed
-                zoom: 10,
+                zoom: 11,
+                mapTypeControl: false // Hides the default map type control
             });
+    
+            // Apply the custom style
+            map.mapTypes.set('styled_map', styledMapType);
+            map.setMapTypeId('styled_map'); // Set it as the default map type
     
             if (typeof healthcareCenters !== 'undefined') {
                 console.log("Data loaded:", healthcareCenters);
                 addCentersToMap(healthcareCenters);
             } else {
                 console.error("healthcareCenters is not defined. Check if data.js is loaded properly.");
+                
+                // Add a fallback message for users
+                document.body.insertAdjacentHTML(
+                    'beforeend',
+                    '<p style="color:red; text-align:center; position:absolute; top:20px; width:100%;">Error loading healthcare data. Please try again later.</p>'
+                );
             }
         }
     
         function addCentersToMap(centers) {
-            // Create a single infoWindow instance
             let infoWindow = new google.maps.InfoWindow();
-        
+    
             centers.forEach(center => {
                 const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
-        
+    
                 const marker = new google.maps.Marker({
                     position: position,
                     map: map,
                     title: center.name,
                     icon: {
-                      url: 'assets/purp.png',
-                      scaledSize: new google.maps.Size(32, 32),
-                      anchor: new google.maps.Point(16, 16)
+                        url: 'assets/purp.png',
+                        scaledSize: new google.maps.Size(32, 32),
+                        anchor: new google.maps.Point(16, 16)
                     }
                 });
-        
-                const myMapBaseUrl = 'https://www.google.com/maps/d/viewer?mid=1lFOGJXJyN4eBEsal5tgE2SQhxpMaaVY';
-                const myMapUrl = `${myMapBaseUrl}&ll=${center.latitude},${center.longitude}&z=14`;
-        
+    
                 const infoContent = `
                     <div>
                         <h3>${center.name}</h3>
@@ -147,41 +233,20 @@
                         <p><strong>Address:</strong> ${center.address}</p>
                         <p><strong>Days of Immunization:</strong> ${center.days_of_immunization}</p>
                         <p><strong>Hours of Work:</strong> ${center.hours_of_work}</p>
-                        <p><a href="${myMapUrl}" target="_blank" rel="noopener noreferrer">View on My Map</a></p>
-                        <hr />
-                        <p><strong>Latitude:</strong> ${center.latitude}</p>
-                        <p><strong>Longitude:</strong> ${center.longitude}</p>
                     </div>
                 `;
-        
+    
                 marker.addListener('click', () => {
-                    // Open the info window
                     infoWindow.setContent(infoContent);
                     infoWindow.open(map, marker);
-    
-                    // Send event to Google Analytics
-                    gtag('event', 'Marker Click', {
-                        'event_category': 'Map Interaction',
-                        'event_label': center.name,
-                        'value': 1
-                    });
-    
-                    // Alternatively, if you prefer more standardized naming:
-                    /*
-                    gtag('event', 'click', {
-                        'event_category': 'Map Marker',
-                        'event_label': center.name,
-                        'value': 1
-                    });
-                    */
                 });
             });
-        
-            // Add a click listener on the map to close the infoWindow if open
+    
             map.addListener('click', () => {
                 infoWindow.close();
             });
-        }        
+        }
     </script>
+    
 </body>
 </html>
