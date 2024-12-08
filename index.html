@@ -211,10 +211,10 @@
     
         function addCentersToMap(centers) {
             let infoWindow = new google.maps.InfoWindow();
-    
+        
             centers.forEach(center => {
                 const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
-    
+        
                 const marker = new google.maps.Marker({
                     position: position,
                     map: map,
@@ -225,7 +225,7 @@
                         anchor: new google.maps.Point(16, 16)
                     }
                 });
-    
+        
                 const infoContent = `
                     <div>
                         <h3>${center.name}</h3>
@@ -235,17 +235,27 @@
                         <p><strong>Hours of Work:</strong> ${center.hours_of_work}</p>
                     </div>
                 `;
-    
+        
+                // Add click listener to the marker
                 marker.addListener('click', () => {
                     infoWindow.setContent(infoContent);
                     infoWindow.open(map, marker);
+        
+                    // Google Analytics Event Tracking
+                    gtag('event', 'Marker Click', {
+                        event_category: 'Map Interaction',
+                        event_label: center.name,
+                        value: 1
+                    });
                 });
             });
-    
+        
+            // Close the info window when the map is clicked
             map.addListener('click', () => {
                 infoWindow.close();
             });
         }
+        
     </script>
     
 </body>
