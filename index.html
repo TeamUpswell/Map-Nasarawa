@@ -145,6 +145,11 @@
             // Initialize the global InfoWindow
             infoWindow = new google.maps.InfoWindow();
         
+            // Add click listener to the map to close the infoWindow
+            map.addListener("click", () => {
+                infoWindow.close();
+            });
+        
             // Add markers for healthcare centers and pharmacies
             if (typeof healthcareCenters !== 'undefined' && Array.isArray(healthcareCenters)) {
                 addCentersToMap(healthcareCenters);
@@ -159,8 +164,7 @@
                 console.error("Pharmacies data not loaded or invalid.");
                 alert("Pharmacies data is unavailable. Please reload the page.");
             }
-        }
-        
+        }               
  function addCentersToMap(centers) {
     centers.forEach(center => {
         const position = { lat: center.latitude, lng: center.longitude };
