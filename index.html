@@ -20,7 +20,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            font-size: 12px; /* Base font size */
+            font-size: 14px; /* Base font size */
             line-height: 1.5; /* Improved readability */
         }
         #map {
@@ -39,30 +39,36 @@
             z-index: 999;
             text-align: center; /* Center the text inside */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better aesthetics */
-        }        
+            font-size: 14px; /* Reduced font size */
+        }
+        
         .legend-item {
             display: flex;
             align-items: center;
             margin-bottom: 5px;
+            font-size: 12px; /* Reduced font size */
         }
-        .legend-item img {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
+        
+        .legend-item span {
+            font-size: 14px; /* Reduced text inside legend items */        
         }
+    
         /* Adjustments for small screens */
         @media (max-width: 600px) {
             body {
                 font-size: 14px; /* Adjust font size for small screens */
             }
             #legend {
-                font-size: 1.2em; /* Larger legend text */
+                font-size: 14px; /* Adjust legend text size for smaller screens */
+            }
+            .legend-item {
+                font-size: 14px; /* Adjust legend item text size */
             }
             .legend-item span {
-                font-size: 1.1em; /* Larger text inside legend items */
+                font-size: 14px; /* Adjust text inside legend items */
             }
         }
-    </style>
+    </style>    
 </head>
 <body>
     <div id="map"></div>
