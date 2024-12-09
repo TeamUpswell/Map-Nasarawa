@@ -144,76 +144,82 @@
             }
         }
         
-        function addCentersToMap(centers) {
-            centers.forEach(center => {
-                const position = { lat: center.latitude, lng: center.longitude };
-                const marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: center.name,
-                    icon: {
-                        url: 'assets/purp.png',
-                        scaledSize: new google.maps.Size(32, 32),
-                        anchor: new google.maps.Point(16, 16)
-                    }
-                });
+ function addCentersToMap(centers) {
+    centers.forEach(center => {
+        const position = { lat: center.latitude, lng: center.longitude };
+        const marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: center.name,
+            icon: {
+                url: 'assets/purp.png',
+                scaledSize: new google.maps.Size(32, 32),
+                anchor: new google.maps.Point(16, 16)
+            }
+        });
+
+        const infoContent = `
+            <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                <h3 style="margin-top: 0;">${center.name}</h3>
+                <p><strong>Address:</strong> ${center.address}</p>
+                <a href="https://www.google.com/maps?q=${center.latitude},${center.longitude}" target="_blank" style="color: #007bff; text-decoration: none;">
+                    View on Google Maps
+                </a>
+            </div>
+        `;
         
+        marker.addListener('click', () => {
+            infoWindow.setContent(infoContent);
+            infoWindow.open(map, marker);
+
+            // Google Analytics event tracking
+            gtag('event', 'Marker Click', {
+                event_category: 'Map Interaction',
+                event_label: center.name,
+                value: 1
+            });
+        });
+    });
+}
+
+function addPharmaciesToMap(pharmacies) {
+    pharmacies.forEach(pharmacy => {
+        const position = { lat: pharmacy.latitude, lng: pharmacy.longitude };
+        const marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: pharmacy.name,
+            icon: {
+                url: 'assets/pharma.png',
+                scaledSize: new google.maps.Size(32, 32),
+                anchor: new google.maps.Point(16, 16)
+            }
+        });
+
             const infoContent = `
-                <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
-                    <h3 style="margin-top: 0;">${center.name}</h3>
-                    <p><strong>Address:</strong> ${center.address}</p>
-                </div>
-            `;
-                           marker.addListener('click', () => {
-                    // Reuse the global InfoWindow
-                    infoWindow.setContent(infoContent);
-                    infoWindow.open(map, marker);
+            <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 8px 10px; margin: 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                <h3 style="margin: 0 0 5px; font-size: 16px;">${pharmacy.name}</h3>
+                <p style="margin: 0 0 8px; font-size: 14px;"><strong>Address:</strong> ${pharmacy.address}</p>
+                <a href="https://www.google.com/maps?q=${pharmacy.latitude},${pharmacy.longitude}" target="_blank" style="color: #007bff; text-decoration: none; font-size: 14px;">
+                    View on Google Maps
+                </a>
+            </div>
+        `;
         
-                    // Google Analytics event tracking
-                    gtag('event', 'Marker Click', {
-                        event_category: 'Map Interaction',
-                        event_label: center.name,
-                        value: 1
-                    });
-                });
-            });
-        }
-        
-        function addPharmaciesToMap(pharmacies) {
-            pharmacies.forEach(pharmacy => {
-                const position = { lat: pharmacy.latitude, lng: pharmacy.longitude };
-                const marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: pharmacy.name,
-                    icon: {
-                        url: 'assets/pharma.png',
-                        scaledSize: new google.maps.Size(32, 32),
-                        anchor: new google.maps.Point(16, 16)
-                    }
-                });
+        marker.addListener('click', () => {
+            infoWindow.setContent(infoContent);
+            infoWindow.open(map, marker);
 
-                const infoContent = `
-                <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
-                    <h3 style="margin-top: 0;">${pharmacy.name}</h3>
-                    <p><strong>Address:</strong> ${pharmacy.address}</p>
-                </div>
-            `;
-            
-                marker.addListener('click', () => {
-                    // Reuse the global InfoWindow
-                    infoWindow.setContent(infoContent);
-                    infoWindow.open(map, marker);
-
-                    // Google Analytics event tracking
-                    gtag('event', 'Pharmacy Click', {
-                        event_category: 'Map Interaction',
-                        event_label: pharmacy.name,
-                        value: 1
-                    });
-                });
+            // Google Analytics event tracking
+            gtag('event', 'Pharmacy Click', {
+                event_category: 'Map Interaction',
+                event_label: pharmacy.name,
+                value: 1
             });
-        }
+        });
+    });
+}
+
     </script>
 </body>
 </html>
