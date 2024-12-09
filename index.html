@@ -20,7 +20,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            font-size: 16px; /* Base font size */
+            font-size: 12px; /* Base font size */
             line-height: 1.5; /* Improved readability */
         }
         #map {
@@ -35,11 +35,11 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px; /* Add rounded corners */
             z-index: 999;
             text-align: center; /* Center the text inside */
-            font-size: 1em; /* Base font size for legend */
-        }
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better aesthetics */
+        }        
         .legend-item {
             display: flex;
             align-items: center;
@@ -158,13 +158,13 @@
                     }
                 });
         
-                const infoContent = `
-                    <div>
-                        <h3>${center.name}</h3>
-                        <p><strong>Address:</strong> ${center.address}</p>
-                    </div>
-                `;
-                marker.addListener('click', () => {
+            const infoContent = `
+                <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                    <h3 style="margin-top: 0;">${center.name}</h3>
+                    <p><strong>Address:</strong> ${center.address}</p>
+                </div>
+            `;
+                           marker.addListener('click', () => {
                     // Reuse the global InfoWindow
                     infoWindow.setContent(infoContent);
                     infoWindow.open(map, marker);
@@ -194,11 +194,12 @@
                 });
 
                 const infoContent = `
-                    <div>
-                        <h3>${pharmacy.name}</h3>
-                        <p><strong>Address:</strong> ${pharmacy.address}</p>
-                    </div>
-                `;
+                <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                    <h3 style="margin-top: 0;">${pharmacy.name}</h3>
+                    <p><strong>Address:</strong> ${pharmacy.address}</p>
+                </div>
+            `;
+            
                 marker.addListener('click', () => {
                     // Reuse the global InfoWindow
                     infoWindow.setContent(infoContent);
