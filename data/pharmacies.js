@@ -53,5 +53,23 @@ pharmacies = [
         "latitude": 8.98728,
         "longitude": 7.67259
     },
+    {
+        "name": "Jaysanta Pharmacy",
+        "address": "2J3R+Q6V, new karu market, Ado",
+        "latitude": 9.0018456,
+        "longitude": 7.6399176
+    },
+    {
+        "name": "PVX (Pax Vobix Xclusive) Pharmacy Maraba",
+        "address": "21 Kabayi Rd, Ado 961105, Nasarawa",
+        "latitude": 9.0340138,
+        "longitude": 7.5912136
+    },
+    {
+        "name": "Simple Smile Pharmacy LTD",
+        "address": "21 Kabayi Rd, Ado 961105, Nasarawa",
+        "latitude": 9.0411437,
+        "longitude": 7.5870956
+    }
     
 ];
