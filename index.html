@@ -6,7 +6,7 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="assets/favicon.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthcare Centers Map</title>
+    <title>Healthcare Centers Map - Nasarawa</title>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZ1464LZXS"></script>
@@ -117,7 +117,7 @@
             <img src="assets/logo.png" alt="Map Logo" style="width: 300px; height: auto; margin-bottom: 10px;" />
         </div>
     </div>    
- 
+
     <!-- Load Data Files -->
     <script src="data/phcs-nasarawa.js"></script>
     <script src="data/pharmacies-nasarawa.js"></script>
@@ -136,6 +136,7 @@
         
         // Function to handle marker clicks
         function handleMarkerClick(locationName, locationCategory) {
+            console.log(`Marker clicked: ${locationName}, Category: ${locationCategory}`); // Debugging line
             gtag('event', 'marker_click', { // GA4-compliant event name
                 'location_category': locationCategory, // e.g., 'healthcare_center' or 'pharmacy'
                 'location_name': locationName, // Specific name of the location
