@@ -15,11 +15,39 @@
         async
     ></script>
     <script>
+        // Existing Google Analytics setup
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-WZ1464LZXS');
-    </script>
+    
+        // Function to handle marker clicks
+        function handleMarkerClick(locationName, locationCategory) {
+            gtag('event', 'marker_click', {
+                'location_category': locationCategory,
+                'location_name': locationName,
+                'value': 1
+            });
+        }
+    
+        // Example usage within your marker click listeners
+        marker.addListener('click', () => {
+            infoWindow.setContent(infoContent);
+            infoWindow.open(map, marker);
+    
+            // Track marker clicks with enhanced parameters
+            handleMarkerClick(center.name, 'healthcare_center'); // For healthcare centers
+        });
+    
+        // Similarly for pharmacies
+        marker.addListener('click', () => {
+            infoWindow.setContent(infoContent);
+            infoWindow.open(map, marker);
+    
+            // Track pharmacy clicks with enhanced parameters
+            handleMarkerClick(pharmacy.name, 'pharmacy');
+        });
+    </script>    
     <style>
         html, body {
             height: 100%;
