@@ -7,49 +7,24 @@
     <link rel="icon" href="assets/favicon.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthcare Centers Map</title>
-    <header id="page-header">
-        <h1>Nasarawa</h1>
-    </header>    
+    
+    <!-- Google Analytics -->
     <script 
         src="https://www.googletagmanager.com/gtag/js?id=G-WZ1464LZXS" 
         async
     ></script>
     <script>
-        // Existing Google Analytics setup
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-WZ1464LZXS');
+    </script>
     
-        // Function to handle marker clicks
-        function handleMarkerClick(locationName, locationCategory) {
-            gtag('event', 'marker_click', {
-                'location_category': locationCategory,
-                'location_name': locationName,
-                'value': 1
-            });
-        }
-    
-        // Example usage within your marker click listeners
-        marker.addListener('click', () => {
-            infoWindow.setContent(infoContent);
-            infoWindow.open(map, marker);
-    
-            // Track marker clicks with enhanced parameters
-            handleMarkerClick(center.name, 'healthcare_center'); // For healthcare centers
-        });
-    
-        // Similarly for pharmacies
-        marker.addListener('click', () => {
-            infoWindow.setContent(infoContent);
-            infoWindow.open(map, marker);
-    
-            // Track pharmacy clicks with enhanced parameters
-            handleMarkerClick(pharmacy.name, 'pharmacy');
-        });
-    </script>    
     <style>
-        html, body {
+        /* Flexbox Layout */
+        body {
+            display: flex;
+            flex-direction: column;
             height: 100%;
             margin: 0;
             padding: 0;
@@ -57,22 +32,34 @@
             font-size: 12px;
             line-height: 1.5;
         }
+
         /* Header Styles */
         #page-header {
             background-color: #f8f9fa; /* Light background for the header */
-            padding: 7px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         #page-header h1 {
             margin: 0;
             font-size: 24px;
             color: #333;
         }
+
+        /* Main Content Styles */
+        #main-content {
+            flex: 1; /* Allow the main content to grow and fill available space */
+            position: relative; /* For positioning the legend and footer */
+        }
+
+        /* Adjust the map to fill the main content area */
         #map {
             height: 100%;
             width: 100%;
         }
+
+        /* Existing Legend Styles */
         #legend {
             position: absolute;
             bottom: 10px;
@@ -106,6 +93,9 @@
         }
     
         @media (max-width: 600px) {
+            #page-header h1 {
+                font-size: 20px;
+            }
             body {
                 font-size: 14px;
             }
@@ -127,191 +117,252 @@
     </style>    
 </head>
 <body>
-    <div id="map"></div>
-    <div id="legend">
-        <div class="legend-item">
-            <img src="assets/purp.png" alt="Healthcare Center Icon" />
-            <span>Get HPV Vaccine Here</span>
-        </div>
-        <div class="legend-item">
-            <img src="assets/pharma.png" alt="Pharmacy Icon" />
-            <span>Talk to a pharmacist about HPV</span>
-        </div>
-        <div class="legend-logo">
-            <img src="assets/logo.png" alt="Map Logo" style="width: 300px; height: auto; margin-bottom: 10px;" />
-        </div>
-    </div>    
+    <!-- Header Section -->
+    <header id="page-header">
+        <h1>Nasarawa</h1>
+    </header>
+    
+    <!-- Main Content Section -->
+    <div id="main-content">
+        <!-- Map Container -->
+        <div id="map"></div>
+        
+        <!-- Legend -->
+        <div id="legend">
+            <div class="legend-item">
+                <img src="assets/purp.png" alt="Healthcare Center Icon" />
+                <span>Get HPV Vaccine Here</span>
+            </div>
+            <div class="legend-item">
+                <img src="assets/pharma.png" alt="Pharmacy Icon" />
+                <span>Talk to a pharmacist about HPV</span>
+            </div>
+            <div class="legend-logo">
+                <img src="assets/logo.png" alt="Map Logo" style="width: 300px; height: auto; margin-bottom: 10px;" />
+            </div>
+        </div>    
 
-    <script src="data/phcs-nasarawa.js"></script>
-    <script src="data/pharmacies-nasarawa.js"></script>
-    <script 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsB8AK2qGgzXnfIC954UJtqDa03--D26g&callback=initMap" 
-        async 
-        defer
-    ></script>
-    <script>
-        let map;
-        let infoWindow;
+        <!-- Load Nasarawa Data -->
+        <script src="data/phcs-nasarawa.js"></script>
+        <script src="data/pharmacies-nasarawa.js"></script>
         
-        function initMap() {
-            const styledMapType = new google.maps.StyledMapType([
-                {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#f7f1df"}]
-                },
-                {
-                    "featureType": "landscape.natural",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#d0e3b4"}]
-                },
-                {
-                    "featureType": "poi.medical",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#fbd3da"}]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#a2daf2"}]
-                }
-            ]);
+        <!-- Google Maps API -->
+        <script 
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsB8AK2qGgzXnfIC954UJtqDa03--D26g&callback=initMap" 
+            async 
+            defer
+        ></script>
         
-            // Initialize map
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 9.02129187717934, lng: 7.611160913968874 },
-                zoom: 12,
-                mapTypeControl: false
-            });
-        
-            // Apply custom map style
-            map.mapTypes.set('styled_map', styledMapType);
-            map.setMapTypeId('styled_map');
-        
-            // Initialize the global InfoWindow
-            infoWindow = new google.maps.InfoWindow();
-        
-            // Close infoWindow when clicking on the map
-            map.addListener("click", () => {
-                infoWindow.close();
-            });
+        <!-- Main JavaScript -->
+        <script>
+            let map;
+            let infoWindow;
             
-            // ===== Additional Event Tracking =====
-            // Track zoom changes
-            map.addListener('zoom_changed', () => {
-                const newZoom = map.getZoom();
-                gtag('event', 'Zoom Change', {
-                    event_category: 'Map Interaction',
-                    event_label: `Zoom Level: ${newZoom}`,
-                    value: newZoom
+            function initMap() {
+                const styledMapType = new google.maps.StyledMapType([
+                    {
+                        "featureType": "landscape.man_made",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#f7f1df"}]
+                    },
+                    {
+                        "featureType": "landscape.natural",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#d0e3b4"}]
+                    },
+                    {
+                        "featureType": "poi.medical",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#fbd3da"}]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#a2daf2"}]
+                    }
+                ]);
+            
+                // Initialize map
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: { lat: 9.02129187717934, lng: 7.611160913968874 },
+                    zoom: 12,
+                    mapTypeControl: false
                 });
-            });
-
-            // Track panning (center changes)
-            let panTimeout;
-            map.addListener('center_changed', () => {
-                clearTimeout(panTimeout);
-                panTimeout = setTimeout(() => {
-                    const center = map.getCenter();
-                    gtag('event', 'Pan', {
-                        event_category: 'Map Interaction',
-                        event_label: `Center: ${center.lat().toFixed(5)}, ${center.lng().toFixed(5)}`,
-                        value: 1
+            
+                // Apply custom map style
+                map.mapTypes.set('styled_map', styledMapType);
+                map.setMapTypeId('styled_map');
+            
+                // Initialize the global InfoWindow
+                infoWindow = new google.maps.InfoWindow();
+            
+                // Close infoWindow when clicking on the map
+                map.addListener("click", () => {
+                    infoWindow.close();
+                });
+                
+                // ===== Additional Event Tracking =====
+                // Track zoom changes
+                map.addListener('zoom_changed', () => {
+                    const newZoom = map.getZoom();
+                    gtag('event', 'zoom_change', { // Use lowercase and underscores
+                        'event_category': 'Map Interaction',
+                        'event_label': `Zoom Level: ${newZoom}`,
+                        'value': newZoom
                     });
-                }, 500);
-            });
+                });
 
-            // Add markers for healthcare centers and pharmacies
-            if (typeof healthcareCenters !== 'undefined' && Array.isArray(healthcareCenters)) {
-                addCentersToMap(healthcareCenters);
-            } else {
-                console.error("Healthcare centers data not loaded or invalid.");
-                alert("Healthcare centers data is unavailable. Please reload the page.");
+                // Track panning (center changes)
+                let panTimeout;
+                map.addListener('center_changed', () => {
+                    clearTimeout(panTimeout);
+                    panTimeout = setTimeout(() => {
+                        const center = map.getCenter();
+                        gtag('event', 'pan', { // Use lowercase and underscores
+                            'event_category': 'Map Interaction',
+                            'event_label': `Center: ${center.lat().toFixed(5)}, ${center.lng().toFixed(5)}`,
+                            'value': 1
+                        });
+                    }, 500);
+                });
+
+                // Add markers for healthcare centers and pharmacies
+                if (typeof healthcareCenters !== 'undefined' && Array.isArray(healthcareCenters)) {
+                    addCentersToMap(healthcareCenters);
+                } else {
+                    console.error("Healthcare centers data not loaded or invalid.");
+                    alert("Healthcare centers data is unavailable. Please reload the page.");
+                }
+            
+                if (typeof pharmacies !== 'undefined' && Array.isArray(pharmacies)) {
+                    addPharmaciesToMap(pharmacies);
+                } else {
+                    console.error("Pharmacies data not loaded or invalid.");
+                    alert("Pharmacies data is unavailable. Please reload the page.");
+                }
             }
+
+            // Function to handle marker clicks
+            function handleMarkerClick(locationName, locationCategory) {
+                gtag('event', 'marker_click', {
+                    'location_category': locationCategory,
+                    'location_name': locationName,
+                    'value': 1
+                });
+            }
+
+            function addCentersToMap(centers) {
+                centers.forEach(center => {
+                    const position = { lat: center.latitude, lng: center.longitude };
+                    const marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: center.name,
+                        icon: {
+                            url: 'assets/purp.png',
+                            scaledSize: new google.maps.Size(32, 32),
+                            anchor: new google.maps.Point(16, 16)
+                        }
+                    });
+
+                    const infoContent = `
+                        <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                            <h3 style="margin-top: 0;">${center.name}</h3>
+                            <p><strong>Address:</strong> ${center.address}</p>
+                            <a href="https://www.google.com/maps?q=${center.latitude},${center.longitude}" target="_blank" style="color: #007bff; text-decoration: none;">
+                                View on Google Maps
+                            </a>
+                        </div>
+                    `;
+                    
+                    marker.addListener('click', () => {
+                        infoWindow.setContent(infoContent);
+                        infoWindow.open(map, marker);
+
+                        // Track marker clicks with enhanced parameters
+                        handleMarkerClick(center.name, 'healthcare_center');
+                    });
+                });
+            }
+
+            function addPharmaciesToMap(pharmacies) {
+                pharmacies.forEach(pharmacy => {
+                    const position = { lat: pharmacy.latitude, lng: pharmacy.longitude };
+                    const marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: pharmacy.name,
+                        icon: {
+                            url: 'assets/pharma.png',
+                            scaledSize: new google.maps.Size(32, 32),
+                            anchor: new google.maps.Point(16, 16)
+                        }
+                    });
+
+                    const infoContent = `
+                        <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 8px 10px; margin: 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                            <h3 style="margin: 0 0 5px; font-size: 16px;">${pharmacy.name}</h3>
+                            <p style="margin: 0 0 8px; font-size: 14px;"><strong>Address:</strong> ${pharmacy.address}</p>
+                            <a href="https://www.google.com/maps?q=${pharmacy.latitude},${pharmacy.longitude}" target="_blank" style="color: #007bff; text-decoration: none; font-size: 14px;">
+                                View on Google Maps
+                            </a>
+                        </div>
+                    `;
+                    
+                    marker.addListener('click', () => {
+                        infoWindow.setContent(infoContent);
+                        infoWindow.open(map, marker);
+
+                        // Track pharmacy clicks with enhanced parameters
+                        handleMarkerClick(pharmacy.name, 'pharmacy');
+                    });
+                });
+            }
+        </script>
+    </div> <!-- End of Main Content -->
+    
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="footer-container">
+            <!-- Logo -->
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Company Logo" />
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="footer-links">
+                <a href="index-nasarawa.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="footer-contact">
+                <p><strong>Contact Us:</strong></p>
+                <p>Email: info@yourdomain.com</p>
+                <p>Phone: +123-456-7890</p>
+            </div>
+            
+            <!-- Social Media Icons -->
+            <div class="footer-social">
+                <a href="https://facebook.com/yourpage" target="_blank" aria-label="Facebook">
+                    <img src="assets/facebook-icon.png" alt="Facebook" />
+                </a>
+                <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter">
+                    <img src="assets/twitter-icon.png" alt="Twitter" />
+                </a>
+                <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+                    <img src="assets/instagram-icon.png" alt="Instagram" />
+                </a>
+                <!-- Add more social icons as needed -->
+            </div>
+        </div>
         
-            if (typeof pharmacies !== 'undefined' && Array.isArray(pharmacies)) {
-                addPharmaciesToMap(pharmacies);
-            } else {
-                console.error("Pharmacies data not loaded or invalid.");
-                alert("Pharmacies data is unavailable. Please reload the page.");
-            }
-        }
-
-        function addCentersToMap(centers) {
-            centers.forEach(center => {
-                const position = { lat: center.latitude, lng: center.longitude };
-                const marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: center.name,
-                    icon: {
-                        url: 'assets/purp.png',
-                        scaledSize: new google.maps.Size(32, 32),
-                        anchor: new google.maps.Point(16, 16)
-                    }
-                });
-
-                const infoContent = `
-                    <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
-                        <h3 style="margin-top: 0;">${center.name}</h3>
-                        <p><strong>Address:</strong> ${center.address}</p>
-                        <a href="https://www.google.com/maps?q=${center.latitude},${center.longitude}" target="_blank" style="color: #007bff; text-decoration: none;">
-                            View on Google Maps
-                        </a>
-                    </div>
-                `;
-                
-                marker.addListener('click', () => {
-                    infoWindow.setContent(infoContent);
-                    infoWindow.open(map, marker);
-
-                    // Track marker clicks
-                    gtag('event', 'Marker Click', {
-                        event_category: 'Map Interaction',
-                        event_label: center.name,
-                        value: 1
-                    });
-                });
-            });
-        }
-
-        function addPharmaciesToMap(pharmacies) {
-            pharmacies.forEach(pharmacy => {
-                const position = { lat: pharmacy.latitude, lng: pharmacy.longitude };
-                const marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: pharmacy.name,
-                    icon: {
-                        url: 'assets/pharma.png',
-                        scaledSize: new google.maps.Size(32, 32),
-                        anchor: new google.maps.Point(16, 16)
-                    }
-                });
-
-                const infoContent = `
-                    <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 8px 10px; margin: 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
-                        <h3 style="margin: 0 0 5px; font-size: 16px;">${pharmacy.name}</h3>
-                        <p style="margin: 0 0 8px; font-size: 14px;"><strong>Address:</strong> ${pharmacy.address}</p>
-                        <a href="https://www.google.com/maps?q=${pharmacy.latitude},${pharmacy.longitude}" target="_blank" style="color: #007bff; text-decoration: none; font-size: 14px;">
-                            View on Google Maps
-                        </a>
-                    </div>
-                `;
-                
-                marker.addListener('click', () => {
-                    infoWindow.setContent(infoContent);
-                    infoWindow.open(map, marker);
-
-                    // Track pharmacy clicks
-                    gtag('event', 'Pharmacy Click', {
-                        event_category: 'Map Interaction',
-                        event_label: pharmacy.name,
-                        value: 1
-                    });
-                });
-            });
-        }
-    </script>
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
