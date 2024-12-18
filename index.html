@@ -136,7 +136,7 @@
         
         // Function to handle marker clicks
 function handleMarkerClick(locationName, locationCategory, lga) {
-    console.log(`Marker clicked: ${locationName}, Category: ${locationCategory}, LGA: ${lga}`); // Debugging line
+    console.log(`Marker clicked: ${locationName}, Category: ${locationCategory}, lga: ${lga}`); // Debugging line
     gtag('event', 'marker_click', { // GA4-compliant event name
         'location_category': locationCategory, // e.g., 'healthcare_center' or 'pharmacy'
         'location_name': locationName, // Specific name of the location
@@ -247,7 +247,7 @@ function handleMarkerClick(locationName, locationCategory, lga) {
                     <div style="border-radius: 8px; overflow: hidden; background: #fff; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
                         <h3 style="margin-top: 0;">${center.name}</h3>
                         <p><strong>Address:</strong> ${center.address}</p>
-                        <p><strong>LGA:</strong> ${center.LGA}</p> <!-- Display LGA in InfoWindow -->
+                        <p><strong>lga:</strong> ${center.lga}</p> <!-- Display lga in InfoWindow -->
                         <a href="https://www.google.com/maps?q=${center.latitude},${center.longitude}" target="_blank" style="color: #007bff; text-decoration: none;">
                             View on Google Maps
                         </a>
@@ -259,7 +259,7 @@ function handleMarkerClick(locationName, locationCategory, lga) {
                     infoWindow.open(map, marker);
         
                     // Track marker clicks with enhanced parameters, including LGA
-                    handleMarkerClick(center.name, 'healthcare_center', center.LGA);
+                    handleMarkerClick(center.name, 'healthcare_center', center.lga);
                 });
             });
         }
