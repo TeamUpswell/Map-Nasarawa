@@ -161,22 +161,23 @@
         function handleMarkerClick(locationName, locationCategory, locationId = null, locationLga = '', locationAddress = '', latitude = 0, longitude = 0) {
             console.log(`Marker clicked: ${locationName}, Category: ${locationCategory}, ID: ${locationId}`);
             
-            // Concatenate ID and Name for the event label
-            const eventLabel = `${locationId} - ${locationName}`;
-            
-            // Prepare event parameters with additional variables
+            // Prepare event parameters with specific pharmacy_name or healthcenter_name
             const eventParams = {
                 'event_category': 'Map Interaction',
                 'event_action': 'marker_click',
-                'event_label': eventLabel, // Combined ID and Name
+                'pharmacy_name': locationCategory === 'pharmacy' ? locationName : undefined, // Specific parameter for pharmacies
+                'healthcenter_name': locationCategory === 'healthcenter' ? locationName : undefined, // Specific for health centers
+                'location_type': locationCategory, // 'pharmacy' or 'healthcenter'
                 'value': 1,
-                // Custom Dimensions (replace 'dimension1', etc., with actual indices from GA)
                 'dimension1': locationLga,
                 'dimension2': locationAddress,
                 'dimension3': latitude.toString(),
                 'dimension4': longitude.toString()
             };
             
+            // Remove undefined properties to avoid sending them to GA4
+            Object.keys(eventParams).forEach(key => eventParams[key] === undefined && delete eventParams[key]);
+
             // Send event to Google Analytics
             gtag('event', 'marker_click', eventParams);
         }
@@ -185,22 +186,23 @@
         function triggerGA(locationId, locationType, locationName, locationLga = '', locationAddress = '', latitude = 0, longitude = 0) {
             console.log(`Triggering GA event for ${locationType} with ID: ${locationId} and Name: ${locationName}`);
             if (typeof gtag === 'function') {
-                // Concatenate ID and Name for the event label
-                const eventLabel = `${locationId} - ${locationName}`;
-                
-                // Prepare event parameters with additional variables
+                // Prepare event parameters with specific pharmacy_name or healthcenter_name
                 const eventParams = {
                     'event_category': 'Map Interaction',
                     'event_action': 'link_click',
-                    'event_label': eventLabel, // Combined ID and Name
+                    'pharmacy_name': locationType === 'pharmacy' ? locationName : undefined, // Specific parameter
+                    'healthcenter_name': locationType === 'healthcenter' ? locationName : undefined, // Specific parameter
+                    'location_type': locationType, // 'pharmacy' or 'healthcenter'
                     'value': 1,
-                    // Custom Dimensions (replace 'dimension1', etc., with actual indices from GA)
                     'dimension1': locationLga,
                     'dimension2': locationAddress,
                     'dimension3': latitude.toString(),
                     'dimension4': longitude.toString()
                 };
                 
+                // Remove undefined properties to avoid sending them to GA4
+                Object.keys(eventParams).forEach(key => eventParams[key] === undefined && delete eventParams[key]);
+
                 gtag('event', 'link_click', eventParams);
                 // No alert needed for user experience
             } else {
@@ -337,7 +339,7 @@
                     infoWindow.setContent(infoContent);
                     infoWindow.open(map, marker);
 
-                    // Track marker clicks with concatenated ID and Name, and additional variables
+                    // Track marker clicks with specific parameters
                     handleMarkerClick(center.name, 'healthcenter', center.id, center.lga, center.address, center.latitude, center.longitude);
                 });
             });
@@ -383,7 +385,7 @@
                     infoWindow.setContent(infoContent);
                     infoWindow.open(map, marker);
                 
-                    // Track pharmacy clicks with concatenated ID and Name, and additional variables
+                    // Track pharmacy clicks with specific parameters
                     handleMarkerClick(pharmacy.name, 'pharmacy', pharmacy.id, pharmacy.lga, pharmacy.address, pharmacy.latitude, pharmacy.longitude);
                 });
             });
@@ -448,19 +450,27 @@
                     google.maps.event.trigger(marker, 'click');
                     console.log(`Opened info window for ID: ${id}`);
         
-                    // Trigger GA event for direct link click with concatenated ID and Name
+                    // Trigger GA event for direct link click with specific parameters
                     console.log(`Sending direct_marker_click event for ID: ${id} and Name: ${locationName}`);
-                    gtag('event', 'direct_marker_click', {
+                    
+                    // Prepare event parameters with specific pharmacy_name or healthcenter_name
+                    const eventParams = {
                         'event_category': 'Map Interaction',
                         'event_action': 'direct_marker_click',
-                        'event_label': `${id} - ${locationName}`, // Combined ID and Name
+                        'pharmacy_name': id.startsWith('p') ? locationName : undefined, // Specific parameter
+                        'healthcenter_name': id.startsWith('c') ? locationName : undefined, // Specific parameter
+                        'location_type': id.startsWith('p') ? 'pharmacy' : 'healthcenter',
                         'value': 1,
-                        // Custom Dimensions (replace 'dimension1', etc., with actual indices from GA)
                         'dimension1': locationLga,
                         'dimension2': locationAddress,
                         'dimension3': latitude.toString(),
                         'dimension4': longitude.toString()
-                    });
+                    };
+                    
+                    // Remove undefined properties to avoid sending them to GA4
+                    Object.keys(eventParams).forEach(key => eventParams[key] === undefined && delete eventParams[key]);
+
+                    gtag('event', 'direct_marker_click', eventParams);
                 } else {
                     console.warn(`No marker found with id: ${id}`);
                 }
