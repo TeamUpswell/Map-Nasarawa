@@ -2,7 +2,7 @@ const healthcareCenters = [
         {
             "id": "h1",
             "name": "Aso Pada Health Clinic",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2JW3+48J Ado 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Thursdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -12,7 +12,7 @@ const healthcareCenters = [
         {
             "id": "h2",
             "name": "Ado Kasa Primary Health Center",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2J6M+V8H Nasarawa 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Friday",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -22,7 +22,7 @@ const healthcareCenters = [
         {
             "id": "h3",
             "name": "Aso Pada Health Clinic",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2JW3+48J Ado 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Thursdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -32,8 +32,8 @@ const healthcareCenters = [
         {
             "id": "h4",
             "name": "Zhehu Primary Health Centre",
-            "lga": "karu",
-            "address": "State: Nasarawa LGA: Karu Ward: Aso Kodape",
+            "lga": "KARU",
+            "address": "State: Nasarawa LGA: KARU Ward: Aso Kodape",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
             "latitude": 8.987552,
@@ -42,7 +42,7 @@ const healthcareCenters = [
         {
             "id": "h5",
             "name": "Kodope Health Clinic",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "XM3H+MJF Nasarawa 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -52,7 +52,7 @@ const healthcareCenters = [
         {
             "id": "h6",
             "name": "Nyanya Gwandara Primary Health Care",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2J6R+WV5 Primary Health Care New Nyanya 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -62,7 +62,7 @@ const healthcareCenters = [
         {
             "id": "h7",
             "name": "A/Sa'aka Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "VPXP+VGF Uke 961103 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -72,7 +72,7 @@ const healthcareCenters = [
         {
             "id": "h8",
             "name": "Kutu Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "VPXP+VGF Uke 961103 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -82,7 +82,7 @@ const healthcareCenters = [
         {
             "id": "h9",
             "name": "A/Shuaibu Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "93RJ+HH8 Nasarawa 962106 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -92,7 +92,7 @@ const healthcareCenters = [
         {
             "id": "h10",
             "name": "Dauro Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "4RC9+9HR Nasarawa 961106 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -102,7 +102,7 @@ const healthcareCenters = [
         {
             "id": "h11",
             "name": "Digizi Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "4RHW+777 Nasarawa 961106 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -112,7 +112,7 @@ const healthcareCenters = [
         {
             "id": "h12",
             "name": "Mararaba Panda Health Clinic",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "7R8P+7QH Nasarawa 961106 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -122,8 +122,8 @@ const healthcareCenters = [
         {
             "id": "h13",
             "name": "Jankanwa Primary Health Centre",
-            "lga": "karu",
-            "address": "2M8R+JVM Janka wa road masaka New Karu",
+            "lga": "KARU",
+            "address": "2M8R+JVM Janka wa road masaka New KARU",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
             "latitude": 9.0165875,
@@ -132,7 +132,7 @@ const healthcareCenters = [
         {
             "id": "h14",
             "name": "Gurku Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2JF2+X4G Mararaba Ado 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -142,7 +142,7 @@ const healthcareCenters = [
         {
             "id": "h15",
             "name": "Ara Sabo Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "962101 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -152,7 +152,7 @@ const healthcareCenters = [
         {
             "id": "h16",
             "name": "Taka Lafiya Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2J4M+5VW Nasarawa 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -161,8 +161,8 @@ const healthcareCenters = [
         },
         {
             "id": "h17",
-            "name": "Karu Primary Health Centre",
-            "lga": "karu",
+            "name": "KARU Primary Health Centre",
+            "lga": "KARU",
             "address": "2J4M+5VW Nasarawa 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -171,8 +171,8 @@ const healthcareCenters = [
         },
         {
             "id": "h18",
-            "name": "Mararaba Primary Health Centre (Karu)",
-            "lga": "karu",
+            "name": "Mararaba Primary Health Centre (KARU)",
+            "lga": "KARU",
             "address": "Ado 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -182,7 +182,7 @@ const healthcareCenters = [
         {
             "id": "h19",
             "name": "Nyanya Gbagyi Primary Health Care",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "2M57+WR9 Nasarawa 961105 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -192,8 +192,8 @@ const healthcareCenters = [
         {
             "id": "h20",
             "name": "Ruga Juli Primary Health Centre",
-            "lga": "karu",
-            "address": "State: Nasarawa LGA: Karu Ward: Karu",
+            "lga": "KARU",
+            "address": "State: Nasarawa LGA: KARU Ward: KARU",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
             "latitude": 8.5474692,
@@ -202,7 +202,7 @@ const healthcareCenters = [
         {
             "id": "h21",
             "name": "Kowa Primary Health Care Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "FGXF+V4W Lafia 950101 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -212,8 +212,8 @@ const healthcareCenters = [
         {
             "id": "h22",
             "name": "Ago Primary Health Centre (Panda/Kare)",
-            "lga": "karu",
-            "address": "State: Nasarawa LGA: Karu Ward: Panda Kare",
+            "lga": "KARU",
+            "address": "State: Nasarawa LGA: KARU Ward: Panda Kare",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
             "latitude": 9.3049619,
@@ -222,7 +222,7 @@ const healthcareCenters = [
         {
             "id": "h23",
             "name": "Jangali Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "FGRG+57P Lafia 950101 Nasarawa",
             "days_of_immunization": "Wednesday and Fridays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -232,7 +232,7 @@ const healthcareCenters = [
         {
             "id": "h24",
             "name": "Uke Primary Health Centre",
-            "lga": "karu",
+            "lga": "KARU",
             "address": "WMJR+F87 New Nyanya 961103 Nasarawa",
             "days_of_immunization": "Tuesday and Wednesdays",
             "hours_of_work": "8:00 am - 2:00 pm",
@@ -1093,7 +1093,7 @@ const healthcareCenters = [
             "id": "h110",
             "name": "Algon Health Clinic",
             "lga": "KARU",
-            "address": "XJPH+R5M New Karu 961105 Nasarawa",
+            "address": "XJPH+R5M New KARU 961105 Nasarawa",
             "days_of_immunization": "Wednesday and Fridays",
             "hours_of_work": "8:00 am - 2:00 pm",
             "latitude": 8.9870875,
@@ -1231,9 +1231,9 @@ const healthcareCenters = [
         },
         {
             "id": "h124",
-            "name": "Karu Primary Health Centre",
+            "name": "KARU Primary Health Centre",
             "lga": "KARU",
-            "address": "XJ9G+868 Ado Nkasa New Karu 961105 Nasarawa",
+            "address": "XJ9G+868 Ado Nkasa New KARU 961105 Nasarawa",
             "days_of_immunization": "Wednesday and Fridays",
             "hours_of_work": "8:00 am - 2:00 pm",
             "latitude": 8.9682875,
@@ -1301,7 +1301,7 @@ const healthcareCenters = [
         },
         {
             "id": "h131",
-            "name": "Mararaba Primary Health Centre (Karu)",
+            "name": "Mararaba Primary Health Centre (KARU)",
             "lga": "KARU",
             "address": "2JG6+7X4 Mararaba Ado 961105 Nasarawa",
             "days_of_immunization": "Wednesday and Fridays",
@@ -1381,7 +1381,7 @@ const healthcareCenters = [
         },
         {
             "id": "h139",
-            "name": "Tudun Uku Health Clinic (Karu)",
+            "name": "Tudun Uku Health Clinic (KARU)",
             "lga": "KARU",
             "address": "GC9X+Q83 Nasarawa 962104 Nasarawa",
             "days_of_immunization": "Wednesday and Fridays",
